@@ -1,20 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { magion, sinter } from "./fonts";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "labb_simple",
-  description: "labb_simple",
+  title: "LABB Studio — Bielsko-Biała",
+  description:
+    "Studio fotograficzno-filmowe do wynajęcia w centrum Bielska-Białej.",
 };
 
 export default function RootLayout({
@@ -24,10 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="pl"
+      className={`${magion.variable} ${sinter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-ink text-paper">
+        {children}
+      </body>
     </html>
   );
 }

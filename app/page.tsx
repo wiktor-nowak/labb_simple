@@ -1,11 +1,19 @@
-export default function Home() {
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import { getFolderImages } from "./lib/imagekit";
+
+export default async function Home() {
+  let images: string[] = [];
+  try {
+    images = await getFolderImages("labb_simple");
+  } catch (error) {
+    console.error("Failed to load ImageKit hero images:", error);
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-center py-32 px-16 bg-white dark:bg-black">
-        <h1 className="text-3xl font-semibold text-black dark:text-zinc-50">
-          labb_simple
-        </h1>
-      </main>
+    <div className="relative h-dvh w-full overflow-hidden bg-ink">
+      <Hero images={images} urlEndpoint={process.env.IMAGEKIT_URL_ENDPOINT} />
+      <Header />
     </div>
   );
 }
