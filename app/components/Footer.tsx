@@ -10,25 +10,25 @@ import {
 const SOCIAL_LINKS = [
   {
     label: "Instagram",
-    href: "https://instagram.com",
+    href: "https://www.instagram.com/labbspace",
     Icon: InstagramIcon,
     hover: "hover:text-[#E4405F] hover:border-[#E4405F] hover:bg-[#E4405F]/10",
   },
   {
     label: "Facebook",
-    href: "https://facebook.com",
+    href: "https://www.facebook.com/labbspace",
     Icon: FacebookIcon,
     hover: "hover:text-[#1877F2] hover:border-[#1877F2] hover:bg-[#1877F2]/10",
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/company/labbspace",
     Icon: LinkedInIcon,
     hover: "hover:text-[#38B6FF] hover:border-[#38B6FF] hover:bg-[#38B6FF]/10",
   },
   {
     label: "TikTok",
-    href: "https://tiktok.com",
+    href: "https://www.tiktok.com/@labbspace",
     Icon: TikTokIcon,
     hover: "hover:text-[#25F4EE] hover:border-[#25F4EE] hover:bg-[#25F4EE]/10",
   },
@@ -44,7 +44,7 @@ const FOOTER_LINKS = [
 export default function Footer() {
   return (
     <footer className="border-t border-line">
-      <div className="mx-auto flex max-w-[1600px] flex-col items-center gap-6 px-6 py-10 sm:px-10">
+      <div className="mx-auto flex max-w-[1600px] flex-col items-center gap-6 px-6 py-10 tablet:px-10">
         <div className="flex items-center gap-6">
           {SOCIAL_LINKS.map(({ label, href, Icon, hover }) => (
             <a
@@ -53,9 +53,9 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className={`flex h-20 w-20 items-center justify-center rounded-full border border-line-strong text-muted transition-colors ${hover}`}
+              className={`flex h-15 w-15 items-center justify-center rounded-full border border-line-strong text-muted transition-colors ${hover}`}
             >
-              <Icon className="h-10 w-10" />
+              <Icon className="h-7.5 w-7.5" />
             </a>
           ))}
         </div>

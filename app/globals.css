@@ -27,9 +27,16 @@
   /* Magion = display/headings/body, Sinter = technical labels/nav/eyebrows */
   --font-sans: var(--font-magion);
   --font-mono: var(--font-sinter);
+}
 
-  /* custom tablet breakpoint per brief (2-col layout kicks in above 820px) */
-  --breakpoint-tablet: 820px;
+/* Exactly three breakpoints app-wide: mobile (<720px, unprefixed base),
+   tablet ("laptop_tablet", 720–1199px), desktop (>=1200px). Resetting the
+   default scale first removes Tailwind's built-in sm/md/lg/xl/2xl so only
+   these two variants (plus the implicit unprefixed mobile base) exist. */
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-tablet: 720px;
+  --breakpoint-desktop: 1200px;
 }
 
 body {

@@ -31,10 +31,16 @@ prompt is final until the user has iterated on it in chat.
 - Tailwind theme mapping (`app/globals.css`): `--font-sans` = Magion
   (display/headings/body per the brief), `--font-mono` = Sinter (technical
   labels/nav/eyebrows/buttons, even though it isn't a literal monospace).
-- Custom Tailwind breakpoint `tablet` = 820px (`--breakpoint-tablet` in
-  `@theme`) — the brief's "desktop/tablet" layouts key off 820px, not the
-  default `md`/768px.
-- Shared UI lives in `app/components/` (`Header.tsx`, `CubeMonogram.tsx`, …).
+- Exactly three breakpoints app-wide, defined in `app/globals.css`. Tailwind's
+  defaults are reset (`--breakpoint-*: initial`) and replaced with just two,
+  so `sm:`/`md:`/`lg:`/`xl:`/`2xl:` **don't exist** — using them is a no-op:
+  - mobile — unprefixed base classes, `<720px`.
+  - `tablet:` ("laptop_tablet") — `≥720px` (720–1199px in practice, but
+    cascades upward like all Tailwind breakpoints unless overridden).
+  - `desktop:` — `≥1200px`. Used sparingly, only where laptop_tablet width
+    genuinely isn't enough (e.g. a fixed-width sidebar next to a 16:9 image
+    on the `/studio` page).
+- Shared UI lives in `app/components/` (`Header.tsx`, `BrandMark.tsx`, …).
 
 ## Design system (from the brief's Section A — Foundation)
 

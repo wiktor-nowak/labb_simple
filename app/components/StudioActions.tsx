@@ -11,7 +11,7 @@ export default function StudioActions() {
     <>
       <div className="mt-16 flex flex-wrap gap-4">
         <Link
-          href="/kontakt"
+          href="/wynajem"
           className="inline-flex items-center rounded-[7px] bg-signal px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-signal-ink transition-opacity hover:opacity-90"
         >
           Zarezerwuj

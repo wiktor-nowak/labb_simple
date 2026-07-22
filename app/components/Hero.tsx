@@ -98,17 +98,17 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
       <div className="pointer-events-none absolute inset-0 bg-black/35" />
 
       {/* content */}
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col justify-center px-6 sm:px-10 tablet:grid tablet:grid-cols-2 tablet:items-center">
-        <div aria-hidden className="hidden tablet:block" />
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col items-center justify-center px-6 tablet:px-10 desktop:grid desktop:grid-cols-2">
+        <div aria-hidden className="hidden desktop:block" />
 
-        <div className="relative flex max-w-lg flex-col items-start gap-4 rounded-2xl border border-line bg-ink/55 px-5 pb-5 pt-24 backdrop-blur-sm sm:pt-28">
+        <div className="relative flex max-w-lg flex-col items-start gap-4 rounded-2xl border border-line bg-ink/55 px-5 pb-5 pt-24 backdrop-blur-sm tablet:pt-28">
           <BrandMark
             size="medium"
             pixels={256}
-            className="absolute left-1/2 top-0 h-42 w-42 -translate-x-1/2 -translate-y-1/2 sm:h-48 sm:w-48"
+            className="absolute left-1/2 top-0 h-42 w-42 -translate-x-1/2 -translate-y-1/2 tablet:h-48 tablet:w-48"
           />
 
-          <h1 className="font-sans text-4xl leading-[1.1] tracking-[-0.01em] text-paper sm:text-5xl">
+          <h1 className="font-sans text-4xl leading-[1.1] tracking-[-0.01em] text-paper tablet:text-5xl desktop:text-6xl">
             LABB studio fotograficzne + filmowe
             <br />
             Bielsko-Biała
@@ -131,7 +131,7 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
         type="button"
         onClick={() => goDelta(-1)}
         aria-label="Poprzednie zdjęcie"
-        className="absolute left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 sm:left-6 sm:flex"
+        className="absolute left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 tablet:left-6 tablet:flex"
       >
         <svg
           viewBox="0 0 24 24"
@@ -147,7 +147,7 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
         type="button"
         onClick={() => goDelta(1)}
         aria-label="Następne zdjęcie"
-        className="absolute right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 sm:right-6 sm:flex"
+        className="absolute right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 tablet:right-6 tablet:flex"
       >
         <svg
           viewBox="0 0 24 24"
@@ -161,7 +161,7 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
       </button>
 
       {/* carousel dot navigation */}
-      <div className="absolute inset-x-0 bottom-8 z-10 flex items-center justify-center gap-2.5 sm:bottom-10">
+      <div className="absolute inset-x-0 bottom-8 z-10 flex items-center justify-center gap-2.5 tablet:bottom-10">
         {slides.map((slide, index) => (
           <button
             key={slide.id}

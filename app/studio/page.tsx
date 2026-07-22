@@ -5,18 +5,21 @@ import StudioActions from "../components/StudioActions";
 import TechnicalDrawings from "../components/TechnicalDrawings";
 
 const SPEC_ROWS = [
-  { label: "Powierzchnia", value: "115 m²" },
-  { label: "Wysokość", value: "3,2 m" },
-  { label: "Krata sufitowa", value: "Truss — podwieszenie na całej powierzchni" },
-  { label: "Podłoga", value: "Beton" },
-  { label: "Światło dzienne", value: "Duże okna (południe) + pełny blackout" },
+  { label: "Pełna powierzchnia wynajmowanego studia", value: "~125 m²" },
+  { label: "Światło dzienne", value: "Duże okna (skierowane na południe)" },
+  { label: "Zaciemnienie studia", value: "Pełen blackout z wykorzystaniem profesjonalnych zasłon" },
+  { label: "Oświetlenie studyjne", value: "Pakiet oświetlenia ciągłego" },
+  { label: "Podłoga", value: "Beton pokryty farbą kompozytową" },
 ];
 
 const DIMENSION_ROWS = [
-  { label: "Strefa zdjęciowa", value: "~80 m²" },
-  { label: "Wysokość trussu", value: "3,2 m" },
-  { label: "Szerokość tła", value: "5 m" },
-  { label: "Głębokość tła", value: "4 m" },
+  { label: "Strefa zdjęciowa", value: "~100 m²" },
+  { label: "Wymiary (A) x (B)", value: "~10 m x ~10 m" },
+  { label: "Szerokość teł", value: "2,72 m" },
+  { label: "Wysokość studia min (X)", value: "3,6 m" },
+  { label: "Wysokość studia max (W)", value: "4,2 m" },
+  { label: "Do konstrukcji min (Y)", value: "2,9 m" },
+  { label: "Do konstrukcji max (Z)", value: "3,4 m" },
 ];
 
 export default function StudioPage() {
@@ -24,11 +27,11 @@ export default function StudioPage() {
     <div className="min-h-dvh bg-ink">
       <Header />
 
-      <main className="mx-auto max-w-[1600px] px-6 py-16 sm:px-10 sm:py-20">
+      <main className="mx-auto max-w-[1600px] px-6 py-16 tablet:px-10 tablet:py-20">
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-faint">
           Studio
         </p>
-        <h1 className="mt-3 max-w-2xl font-sans text-4xl leading-[1.05] tracking-[-0.01em] text-paper sm:text-5xl">
+        <h1 className="mt-3 max-w-2xl font-sans text-4xl leading-[1.05] tracking-[-0.01em] text-paper tablet:text-5xl">
           Specyfikacja
         </h1>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-muted">
@@ -41,7 +44,7 @@ export default function StudioPage() {
         <p className="mt-16 font-mono text-xs uppercase tracking-[0.2em] text-faint">
           Plan studia
         </p>
-        <div className="mt-6 grid grid-cols-1 gap-8 tablet:grid-cols-[1fr_320px]">
+        <div className="mt-6 grid grid-cols-1 gap-8 desktop:grid-cols-[1fr_320px]">
           <TechnicalDrawings />
           <SpecTable rows={DIMENSION_ROWS} />
         </div>

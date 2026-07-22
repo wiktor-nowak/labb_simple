@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-line bg-ink/55 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-6 py-5 sm:px-10">
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-6 py-5 tablet:px-10">
         <Link
           href="/"
           className="flex items-center gap-3"
@@ -39,7 +39,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3 sm:gap-5">
+        <div className="flex items-center gap-3 tablet:gap-5">
           <Link
             href="/kontakt"
             className="hidden items-center rounded-[7px] border border-line-strong px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-paper transition-colors hover:bg-white/5 tablet:inline-flex"
@@ -49,7 +49,7 @@ export default function Header() {
 
           <button
             type="button"
-            className="hidden items-center font-mono text-xs uppercase tracking-[0.2em] sm:inline-flex"
+            className="hidden items-center font-mono text-xs uppercase tracking-[0.2em] tablet:inline-flex"
             aria-label="Przełącz język na angielski"
           >
             <span className="text-paper">PL</span>
@@ -58,7 +58,7 @@ export default function Header() {
           </button>
 
           <Link
-            href="/kontakt"
+            href="/wynajem"
             className="inline-flex items-center rounded-[7px] bg-signal px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-signal-ink transition-opacity hover:opacity-90"
           >
             Zarezerwuj

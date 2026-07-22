@@ -58,13 +58,13 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
         aria-modal="true"
         aria-labelledby="pricing-dialog-title"
         onClick={(event) => event.stopPropagation()}
-        className="relative flex h-[92vh] w-full max-w-5xl flex-col overflow-y-auto rounded-2xl border border-line bg-surface p-6 sm:h-[88vh] sm:p-10"
+        className="relative flex h-[92vh] w-full max-w-5xl flex-col overflow-y-auto rounded-2xl border border-line bg-surface p-6 tablet:h-[88vh] tablet:p-10"
       >
         <button
           type="button"
           onClick={onClose}
           aria-label="Zamknij"
-          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 sm:right-6 sm:top-6"
+          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 tablet:right-6 tablet:top-6"
         >
           <svg
             viewBox="0 0 24 24"
@@ -82,7 +82,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
         </p>
         <h2
           id="pricing-dialog-title"
-          className="mt-2 max-w-2xl font-sans text-3xl leading-[1.1] tracking-[-0.01em] text-paper sm:text-4xl"
+          className="mt-2 max-w-2xl font-sans text-3xl leading-[1.1] tracking-[-0.01em] text-paper tablet:text-4xl"
         >
           Cennik wynajmu studia
         </h2>
@@ -147,7 +147,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
             type="button"
             className="inline-flex items-center rounded-[7px] bg-signal px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-signal-ink transition-opacity hover:opacity-90 cursor-pointer"
             onClick={() => {
-              console.log("xxx");
+              window.location.href = "/wynajem";
             }}
           >
             Zarezerwuj
