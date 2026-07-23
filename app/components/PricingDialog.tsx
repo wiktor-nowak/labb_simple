@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
+import { BASE_EQUIPMENT } from "../lib/equipment";
 
 type PricingDialogProps = {
   open: boolean;
@@ -16,16 +18,6 @@ const HOURLY_RATES = [
   { label: "6 h", price: "780 zł" },
   { label: "7 h", price: "900 zł" },
   { label: "8 - 12h", price: "1000 zł" },
-];
-
-const LIGHTING_EQUIPMENT = [
-  "Nanlite Forza 500",
-  "Nanlite Forza 300",
-  "Mata LED Falcon Eyes RGB x2",
-  "Miecz LED Newell RGB Kathi II x2",
-  "Softbox 105cm + grid x2",
-  "C-stand x2",
-  "Statyw Manfrotto lekki x2",
 ];
 
 export default function PricingDialog({ open, onClose }: PricingDialogProps) {
@@ -48,7 +40,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
 
   if (!open) return null;
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
       onClick={onClose}
@@ -64,7 +56,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
           type="button"
           onClick={onClose}
           aria-label="Zamknij"
-          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 tablet:right-6 tablet:top-6"
+          className="absolute right-4 top-4 inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 tablet:right-6 tablet:top-6"
         >
           <svg
             viewBox="0 0 24 24"
@@ -108,7 +100,6 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
               <br/>
               8 h i więcej to stawka całodniowa - 1000 zł.
               <br/>
-              (taniej niż liczone po godzinie)
             </p>
           </div>
 
@@ -117,7 +108,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
               Oświetlenie w cenie wynajmu
             </p>
             <div className="mt-4 border-t border-line">
-              {LIGHTING_EQUIPMENT.map((item) => (
+              {BASE_EQUIPMENT.map((item) => (
                 <div
                   key={item}
                   className="flex items-center gap-3 border-b border-line py-3"
@@ -137,7 +128,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
             <p className="mt-4 text-sm leading-relaxed text-muted">
               Minimalna rezerwacja: 1 h
               <br/>
-              Bezpłatne odwołanie do 24 h przed terminem.
+              Bezpłatne odwołanie do 48 h przed terminem.
             </p>
           </div>
         </div>
@@ -163,6 +154,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

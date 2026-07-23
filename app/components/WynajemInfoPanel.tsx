@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { WhatsAppIcon } from "./icons/SocialIcons";
 import PricingDialog from "./PricingDialog";
-
-const WHATSAPP_HREF = "https://wa.me/48535520745";
+import { WHATSAPP_HREF } from "../lib/contact";
 
 /**
  * The source PNG is black line-art on an opaque white background — plain
@@ -68,7 +67,13 @@ export default function WynajemInfoPanel() {
           Godziny otwarcia
         </p>
         <p className="mt-2 font-sans text-paper">
-          Codziennie 8:00 – 22:00, po wcześniejszej rezerwacji
+          Codziennie 6:00 – 24:00, po wcześniejszej rezerwacji
+        </p>
+        <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-faint">
+          Godziny kontaktu
+        </p>
+        <p className="mt-2 font-sans text-paper">
+          W tygodniu 10:00 – 18:00, w weekendy do 24h
         </p>
       </div>
 
@@ -76,7 +81,7 @@ export default function WynajemInfoPanel() {
         <button
           type="button"
           onClick={() => setPricingOpen(true)}
-          className="inline-flex items-center rounded-[7px] bg-signal px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-signal-ink transition-opacity hover:opacity-90"
+          className="inline-flex cursor-pointer items-center rounded-[7px] bg-signal px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-signal-ink transition-opacity hover:opacity-90"
         >
           Cennik
         </button>

@@ -15,12 +15,13 @@ export default function WynajemPage() {
         <h1 className="mt-3 max-w-full font-sans text-3xl leading-[1.05] tracking-[-0.01em] text-paper tablet:text-5xl">
           Napisz, co chcesz zrealizować
         </h1>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-muted">
-          Wynająć przestrzeń, dobrać sprzęt albo zlecić nam realizację wideo?
+        <p className="mt-4 text-base leading-relaxed text-muted">
+          U nas wynajmiesz przestrzeń, dobierzesz sprzęt odpowiedni do Twoich potrzeb, a nawet zlecisz naszemu zespołowi realizację wideo.
+          <br />
           Napisz — odpowiadamy w ciągu 24 godzin.
         </p>
 
-        <div className="mt-12 grid grid-cols-1 gap-10 desktop:grid-cols-[3fr_2fr]">
+        <div className="mt-12 grid grid-cols-1 items-start gap-10 desktop:grid-cols-[3fr_2fr]">
           <WynajemForm />
           <WynajemInfoPanel />
         </div>

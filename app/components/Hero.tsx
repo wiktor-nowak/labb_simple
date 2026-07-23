@@ -1,11 +1,21 @@
 "use client";
 
 import { Image as IKImage } from "@imagekit/next";
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import BrandMark from "./BrandMark";
 import PricingDialog from "./PricingDialog";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  MailIcon,
+  WhatsAppIcon,
+} from "./icons/SocialIcons";
+import { CONTACT_EMAIL, WHATSAPP_HREF } from "../lib/contact";
 
 const AUTOPLAY_MS = 5000;
+const iconButtonClass =
+  "flex h-16.5 w-16.5 items-center justify-center rounded-full border border-line-strong bg-ink/55 text-paper backdrop-blur-sm transition-colors";
 
 /* Placeholder "photo" tones — used only if no ImageKit images are available. */
 const FALLBACK_COLORS = [
@@ -34,7 +44,9 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
 
   const [active, setActive] = useState(0);
   const [pricingOpen, setPricingOpen] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const copiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const startAutoplay = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -58,6 +70,23 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
   const goDelta = (delta: number) => {
     goTo((active + delta + slides.length) % slides.length);
   };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
+    } catch {
+      // Clipboard API unavailable (e.g. insecure context); nothing more we can do.
+    }
+    setEmailCopied(true);
+    if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+    copiedTimerRef.current = setTimeout(() => setEmailCopied(false), 3000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+    };
+  }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden">
@@ -101,28 +130,86 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
       <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col items-center justify-center px-6 tablet:px-10 desktop:grid desktop:grid-cols-2">
         <div aria-hidden className="hidden desktop:block" />
 
-        <div className="relative flex max-w-lg flex-col items-start gap-4 rounded-2xl border border-line bg-ink/55 px-5 pb-5 pt-24 backdrop-blur-sm tablet:pt-28">
-          <BrandMark
-            size="medium"
-            pixels={256}
-            className="absolute left-1/2 top-0 h-42 w-42 -translate-x-1/2 -translate-y-1/2 tablet:h-48 tablet:w-48"
-          />
+        <div className="flex flex-col items-center gap-6">
+          <div className="flex max-w-lg flex-col items-center gap-4 rounded-2xl border border-line bg-ink/55 px-5 py-5 backdrop-blur-sm">
+            <BrandMark
+              size="medium"
+              pixels={256}
+              className="top-0 h-42 w-42 h-48 tablet:w-48"
+            />
 
-          <h1 className="font-sans text-4xl leading-[1.1] tracking-[-0.01em] text-paper tablet:text-5xl desktop:text-6xl">
-            LABB studio fotograficzne + filmowe
-            <br />
-            Bielsko-Biała
-          </h1>
+            <h1 className="flex flex-col items-center font-sans text-2xl leading-[1.1] tracking-[-0.01em] text-paper tablet:text-3xl desktop:text-4xl text-center tablet:pb-1 desktop:pb-4">
+              <span className="text-4xl tablet:text-5xl desktop:text-6xl font-mono text-signal">LABB</span>
+              <span className="font-mono text-paper tracking-[0.2em]">STUDIO</span>
+            
+              fotograficzne + filmowe
+              <br />
+              Bielsko-Biała
+            </h1>
 
-          <div className="flex w-full justify-center">
+            <div className="flex w-full justify-center">
+              <button
+                type="button"
+                onClick={() => setPricingOpen(true)}
+                className="inline-flex w-1/2 items-center justify-center rounded-[7px] bg-signal px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-signal-ink transition-opacity hover:opacity-90 cursor-pointer"
+              >
+                Sprawdź ceny
+              </button>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center gap-4">
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className={`${iconButtonClass} hover:border-[#25D366] hover:bg-[#25D366]/10 hover:text-[#25D366]`}
+            >
+              <WhatsAppIcon className="h-7.5 w-7.5" />
+            </a>
+
             <button
               type="button"
-              onClick={() => setPricingOpen(true)}
-              className="inline-flex w-3/4 items-center justify-center rounded-[7px] bg-signal px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-signal-ink transition-opacity hover:opacity-90 cursor-pointer"
+              onClick={handleCopyEmail}
+              aria-label="Skopiuj adres e-mail"
+              className={`${iconButtonClass} cursor-pointer hover:border-[#FACC15] hover:bg-[#FACC15]/10 hover:text-[#FACC15]`}
             >
-              Sprawdź ceny
+              <MailIcon className="h-7.5 w-7.5" />
             </button>
+
+            <a
+              href="https://www.instagram.com/labbspace"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className={`${iconButtonClass} hover:border-[#E4405F] hover:bg-[#E4405F]/10 hover:text-[#E4405F]`}
+            >
+              <InstagramIcon className="h-7.5 w-7.5" />
+            </a>
+
+            <a
+              href="https://www.facebook.com/labbspace"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className={`${iconButtonClass} hover:border-[#1877F2] hover:bg-[#1877F2]/10 hover:text-[#1877F2]`}
+            >
+              <FacebookIcon className="h-7.5 w-7.5" />
+            </a>
           </div>
+        </div>
+      </div>
+
+      {/* email-copied toast */}
+      <div
+        aria-live="polite"
+        className={`pointer-events-none fixed bottom-6 left-6 z-50 transition-all duration-300 ${
+          emailCopied ? "opacity-100 translate-y-0" : "translate-y-2 opacity-0"
+        }`}
+      >
+        <div className="rounded-[7px] border border-line-strong bg-surface px-4 py-3 font-sans text-sm text-paper">
+          Adres email skopiowany do schowka.
         </div>
       </div>
 
@@ -131,11 +218,11 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
         type="button"
         onClick={() => goDelta(-1)}
         aria-label="Poprzednie zdjęcie"
-        className="absolute left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 tablet:left-6 tablet:flex"
+        className="absolute left-4 top-1/2 z-10 hidden h-11 w-11 cursor-pointer -translate-y-1/2 items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 tablet:left-6 tablet:flex"
       >
         <svg
           viewBox="0 0 24 24"
-          className="h-4 w-4"
+          className="h-6 w-6"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"
@@ -147,11 +234,11 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
         type="button"
         onClick={() => goDelta(1)}
         aria-label="Następne zdjęcie"
-        className="absolute right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 tablet:right-6 tablet:flex"
+        className="absolute right-4 top-1/2 z-10 hidden h-11 w-11 cursor-pointer -translate-y-1/2 items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 tablet:right-6 tablet:flex"
       >
         <svg
           viewBox="0 0 24 24"
-          className="h-4 w-4"
+          className="h-6 w-6"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"
@@ -169,10 +256,10 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
             onClick={() => goTo(index)}
             aria-label={`Przejdź do zdjęcia ${index + 1}`}
             aria-current={index === active}
-            className={`h-1.5 rounded-full transition-all duration-500 ${
+            className={`h-2.25 cursor-pointer rounded-full transition-all duration-500 ${
               index === active
-                ? "w-8 bg-signal"
-                : "w-1.5 bg-line-strong hover:bg-muted"
+                ? "w-12 bg-signal"
+                : "w-2.25 bg-line-strong hover:bg-muted"
             }`}
           />
         ))}

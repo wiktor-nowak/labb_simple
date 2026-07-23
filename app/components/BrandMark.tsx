@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 const SOURCES = {
-  small: "/images/LABB_Alpha_Small.png",
-  medium: "/images/LABB_Alpha_Medium.png",
+  small: "/images/LABB_Alpha_Medium.png",
+  medium: "/images/LABB_Alpha_Large.png",
 } as const;
 
 type BrandMarkProps = {
