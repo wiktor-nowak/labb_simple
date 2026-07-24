@@ -1,3 +1,0 @@
-labbstudio.pl, www.labbstudio.pl {
-  reverse_proxy app:3000
-}

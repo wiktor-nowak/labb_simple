@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -10,6 +11,13 @@ import {
   STUDIO_PHONE,
   STUDIO_REGON,
 } from "../lib/contact";
+
+export const metadata: Metadata = {
+  title: "Kontakt",
+  description:
+    "Adres, telefon i e-mail LABB Studio w Bielsku-Białej, plus mapa dojazdu i dane rejestrowe.",
+  alternates: { canonical: "/kontakt" },
+};
 
 export default function KontaktPage() {
   return (

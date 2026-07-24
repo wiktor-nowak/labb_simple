@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import LegalPageLayout from "../components/LegalPageLayout";
+
+export const metadata: Metadata = {
+  title: "Polityka prywatności",
+  description: "Jakie dane zbiera LABB Studio i w jakim celu je przetwarza.",
+  alternates: { canonical: "/polityka-prywatnosci" },
+  robots: { index: false, follow: true },
+};
 
 const SECTIONS = [
   {

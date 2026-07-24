@@ -1,9 +1,17 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LocationMap from "../components/LocationMap";
 import SpecTable from "../components/SpecTable";
 import { STUDIO_ADDRESS } from "../lib/contact";
+
+export const metadata: Metadata = {
+  title: "Jak dotrzeć",
+  description:
+    "Trasa dojazdu i mapa do LABB Studio, 1 Maja 24, 43-300 Bielsko-Biała.",
+  alternates: { canonical: "/jak-dotrzec" },
+};
 
 export default function JakDotrzecPage() {
   return (

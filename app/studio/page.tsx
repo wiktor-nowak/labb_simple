@@ -1,9 +1,17 @@
+import type { Metadata } from "next";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import SpecTable from "../components/SpecTable";
 import StudioActions from "../components/StudioActions";
 import TechnicalDrawings from "../components/TechnicalDrawings";
 import { BASE_EQUIPMENT } from "../lib/equipment";
+
+export const metadata: Metadata = {
+  title: "Studio — specyfikacja i wyposażenie",
+  description:
+    "Sala ~125 m², pełen blackout, oświetlenie studyjne i sprzęt podstawowy w cenie wynajmu. Sprawdź wymiary, plan studia i wyposażenie.",
+  alternates: { canonical: "/studio" },
+};
 
 const SPEC_ROWS = [
   { label: "Pełna powierzchnia wynajmowanego studia", value: "~125 m²" },

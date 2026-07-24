@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import LegalPageLayout from "../components/LegalPageLayout";
+
+export const metadata: Metadata = {
+  title: "Regulamin wynajmu",
+  description: "Zasady rezerwacji, płatności i odwołań w LABB Studio.",
+  alternates: { canonical: "/regulamin-wynajmu" },
+  robots: { index: false, follow: true },
+};
 
 const SECTIONS = [
   {

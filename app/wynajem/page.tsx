@@ -1,7 +1,15 @@
+import type { Metadata } from "next";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import WynajemForm from "../components/WynajemForm";
 import WynajemInfoPanel from "../components/WynajemInfoPanel";
+
+export const metadata: Metadata = {
+  title: "Wynajem studia",
+  description:
+    "Zarezerwuj wynajem studia, sprzętu lub realizację wideo w LABB Studio — wypełnij formularz, odpowiadamy w ciągu 24 godzin.",
+  alternates: { canonical: "/wynajem" },
+};
 
 export default function WynajemPage() {
   return (

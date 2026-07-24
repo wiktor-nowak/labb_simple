@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import LegalPageLayout from "../components/LegalPageLayout";
+
+export const metadata: Metadata = {
+  title: "Regulamin studia",
+  description: "Zasady korzystania ze studia i wyposażenia w LABB Studio.",
+  alternates: { canonical: "/regulamin-studia" },
+  robots: { index: false, follow: true },
+};
 
 const SECTIONS = [
   {
