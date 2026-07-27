@@ -1,7 +1,6 @@
 "use client";
 
 import { Image as IKImage } from "@imagekit/next";
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import BrandMark from "./BrandMark";
 import PricingDialog from "./PricingDialog";
