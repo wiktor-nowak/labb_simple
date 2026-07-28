@@ -4,62 +4,27 @@ import { useState } from "react";
 import { WhatsAppIcon } from "./icons/SocialIcons";
 import PricingDialog from "./PricingDialog";
 import { WHATSAPP_HREF } from "../lib/contact";
+import Image from "next/image";
 
 /**
- * The source PNG is black line-art on an opaque white background — plain
- * CSS filters (hue-rotate, sepia, etc.) can't recolor true black/white since
- * those are fixed points of every standard filter matrix. Instead: an SVG
- * mask inverts the image's luminance (so the line-art becomes the "visible"
- * region and the white background becomes "hidden"), then a plain bg-signal
- * div is masked by it — giving an accent-coloured mark with no background
- * at all, rather than a filter-tinted logo sitting in a colour tile.
+ * The logo asset here is already colour, rendered straight via next/image —
+ * no SVG mask/filter trick needed (that approach was for recolouring a
+ * black-line-art PNG and is no longer necessary now that a pre-coloured
+ * export exists).
  */
-function AccentLogo({ className }: { className?: string }) {
-  return (
-    <div className={className}>
-      <svg width="0" height="0" aria-hidden focusable="false">
-        <defs>
-          <filter id="wynajem-logo-invert" colorInterpolationFilters="sRGB">
-            <feColorMatrix
-              type="matrix"
-              values="-1 0 0 0 1
-                      0 -1 0 0 1
-                      0 0 -1 0 1
-                      0 0 0 1 0"
-            />
-          </filter>
-          <mask
-            id="wynajem-logo-mask"
-            maskContentUnits="objectBoundingBox"
-          >
-            <image
-              href="/images/LABB_WB_Alpha_Large_V2.png"
-              width="1"
-              height="1"
-              preserveAspectRatio="xMidYMid meet"
-              filter="url(#wynajem-logo-invert)"
-            />
-          </mask>
-        </defs>
-      </svg>
-      <div
-        className="h-full w-full bg-signal"
-        style={{
-          WebkitMaskImage: "url(#wynajem-logo-mask)",
-          maskImage: "url(#wynajem-logo-mask)",
-        }}
-      />
-    </div>
-  );
-}
-
 export default function WynajemInfoPanel() {
   const [pricingOpen, setPricingOpen] = useState(false);
 
   return (
     <div className="flex flex-col gap-8 rounded-2xl border border-line bg-surface p-6 tablet:p-8">
       <div className="flex justify-center">
-        <AccentLogo className="h-80 w-80 tablet:h-100 tablet:w-100" />
+        <Image
+          src={"/images/LABB_Alpha_color_Medium.png"}
+          alt="LABB Studio"
+          width={256}
+          height={256}
+          className={'object-contain top-0 h-80 w-80'}
+        />
       </div>
 
       <div>

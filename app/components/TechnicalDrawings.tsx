@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 const DRAWINGS = [
-  { src: "/schemes/schemat_gora.png", name: "Rzut poziomy studia" },
-  { src: "/schemes/schemat_przekroj.png", name: "Przekrój - wysokość studia" },
+  { src: "/schemes/Studio_LABB_Top.jpg", name: "Rzut poziomy studia" },
+  { src: "/schemes/Studio_LABB_Side.jpg", name: "Przekrój - wysokość studia" },
 ];
 
 export default function TechnicalDrawings() {
@@ -35,7 +35,7 @@ export default function TechnicalDrawings() {
   }, [previewOpen]);
 
   return (
-    <div className="relative flex aspect-[4/3] items-center justify-center rounded-2xl border border-line bg-white tablet:aspect-video overflow-hidden">
+    <div className="relative flex aspect-4/3 items-center justify-center rounded-2xl border border-line bg-white tablet:aspect-video overflow-hidden">
       <button
         type="button"
         onClick={() => goDelta(-1)}
@@ -83,11 +83,10 @@ export default function TechnicalDrawings() {
         </div>
       </button>
 
-      <div className="pointer-events-none absolute bottom-4 right-4 text-right">
+      <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 text-center">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink/50">
           Rysunek techniczny {index + 1} / {DRAWINGS.length}
         </p>
-        <p className="mt-2 font-sans text-lg text-ink">{DRAWINGS[index].name}</p>
       </div>
 
       <button

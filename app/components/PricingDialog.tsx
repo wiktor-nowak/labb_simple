@@ -42,7 +42,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-100 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
@@ -50,7 +50,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
         aria-modal="true"
         aria-labelledby="pricing-dialog-title"
         onClick={(event) => event.stopPropagation()}
-        className="relative flex h-[92vh] w-full max-w-5xl flex-col overflow-y-auto rounded-2xl border border-line bg-surface p-6 tablet:h-[88vh] tablet:p-10"
+        className="styled-scrollbar relative flex h-[92vh] w-full max-w-5xl flex-col overflow-y-auto rounded-2xl border border-line bg-surface p-6 tablet:h-[88vh] tablet:p-10"
       >
         <button
           type="button"
@@ -81,9 +81,14 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
 
         <div className="mt-10 grid flex-1 grid-cols-1 gap-10 tablet:grid-cols-2 tablet:gap-14">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
-              Stawki godzinowe
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
+                Stawki godzinowe
+              </p>
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
+                [kwota brutto]
+              </p>
+            </div>
             <div className="mt-4 border-t border-line">
               {HOURLY_RATES.map((rate) => (
                 <div
@@ -95,12 +100,22 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-muted">
-              Od drugiej godziny każda kolejna + 120 zł.
-              <br/>
-              8 h i więcej to stawka całodniowa - 1000 zł.
-              <br/>
-            </p>
+            <div className="mt-6 flex items-center justify-between">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
+                Opłaty dodatkowe
+              </p>
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
+                [kwota brutto]
+              </p>
+            </div>
+            <div className="mt-4 border-t border-line">
+              <div className="flex items-center justify-between border-b border-line py-3">
+                <span className="font-sans text-paper">
+                  1 m zużytego tła
+                </span>
+                <span className="font-mono text-paper">40 zł</span>
+              </div>
+            </div>
           </div>
 
           <div>
@@ -128,7 +143,9 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
             <p className="mt-4 text-sm leading-relaxed text-muted">
               Minimalna rezerwacja: 1 h
               <br/>
-              Bezpłatne odwołanie do 48 h przed terminem.
+              Stawka całodniowa: 1000 zł.
+              <br/>
+              Bezpłatne odwołanie: do 48 h przed terminem.
             </p>
           </div>
         </div>

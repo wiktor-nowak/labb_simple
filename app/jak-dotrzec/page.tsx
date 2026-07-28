@@ -37,6 +37,7 @@ export default function JakDotrzecPage() {
                 src="/schemes/way_to_studio_labb.png"
                 alt="Trasa dojazdu do studia"
                 fill
+                sizes="(max-width: 720px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>

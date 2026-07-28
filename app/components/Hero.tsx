@@ -28,11 +28,31 @@ const FALLBACK_COLORS = [
 type Slide = { id: string; url?: string; color?: string };
 
 type HeroProps = {
-  images?: string[];
+  mobileImages?: string[];
+  desktopImages?: string[];
   urlEndpoint?: string;
 };
 
-export default function Hero({ images = [], urlEndpoint }: HeroProps) {
+/* Matches the project's mobile/tablet breakpoint (globals.css --breakpoint-tablet). */
+const MOBILE_QUERY = "(max-width: 719px)";
+
+export default function Hero({
+  mobileImages = [],
+  desktopImages = [],
+  urlEndpoint,
+}: HeroProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia(MOBILE_QUERY);
+    setIsMobile(mql.matches);
+    const handleChange = (event: MediaQueryListEvent) => setIsMobile(event.matches);
+    mql.addEventListener("change", handleChange);
+    return () => mql.removeEventListener("change", handleChange);
+  }, []);
+
+  const images = isMobile ? mobileImages : desktopImages;
+
   const slides: Slide[] =
     images.length > 0
       ? images.map((url) => ({ id: url, url }))
@@ -42,6 +62,10 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
         }));
 
   const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    setActive(0);
+  }, [isMobile]);
   const [pricingOpen, setPricingOpen] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -95,7 +119,7 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
           <div
             key={slide.id}
             aria-hidden={index !== active}
-            className="absolute inset-0 transition-opacity duration-[900ms] ease-in-out"
+            className="absolute inset-0 transition-opacity duration-900ms ease-in-out"
             style={{ opacity: index === active ? 1 : 0 }}
           >
             <div
@@ -126,7 +150,11 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
       <div className="pointer-events-none absolute inset-0 bg-black/35" />
 
       {/* content */}
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col items-center justify-center px-6 tablet:px-10 desktop:grid desktop:grid-cols-2">
+      {/* pt-[81px] reserves the sticky header's height so the card + icon
+          row center in the space below it, not across the full viewport
+          (header height is constant across breakpoints: 48px logo + 2*16px
+          padding + 1px border). */}
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col items-center justify-center px-6 pt-20.25 tablet:px-10 desktop:grid desktop:grid-cols-2">
         <div aria-hidden className="hidden desktop:block" />
 
         <div className="flex flex-col items-center gap-6">
@@ -134,13 +162,13 @@ export default function Hero({ images = [], urlEndpoint }: HeroProps) {
             <BrandMark
               size="medium"
               pixels={256}
-              className="top-0 h-42 w-42 h-48 tablet:w-48"
+              className="top-0 h-32 w-32 tablet:h-48 tablet:w-48"
             />
 
             <h1 className="flex flex-col items-center font-sans text-2xl leading-[1.1] tracking-[-0.01em] text-paper tablet:text-3xl desktop:text-4xl text-center tablet:pb-1 desktop:pb-4">
               <span className="text-4xl tablet:text-5xl desktop:text-6xl font-mono text-signal">LABB</span>
-              <span className="font-mono text-paper tracking-[0.2em]">STUDIO</span>
-            
+              studio
+            <br/>
               fotograficzne + filmowe
               <br />
               Bielsko-Biała
