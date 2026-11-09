@@ -40,11 +40,12 @@ export function MailIcon({ className }: IconProps) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="2.2"
       className={className}
     >
-      <rect x="2.5" y="4.5" width="19" height="15" rx="2" />
-      <path d="M3 6.5l9 6.5 9-6.5" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Stroke and size match the Instagram/WhatsApp outlines next to it. */}
+      <rect x="1.6" y="4.1" width="20.8" height="15.8" rx="3" />
+      <path d="M2.6 6.4 12 13l9.4-6.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

@@ -10,11 +10,10 @@ import {
   MailIcon,
   WhatsAppIcon,
 } from "./icons/SocialIcons";
+import { iconButtonClass } from "./icons/iconButtonClass";
 import { CONTACT_EMAIL, WHATSAPP_HREF } from "../lib/contact";
 
 const AUTOPLAY_MS = 5000;
-const iconButtonClass =
-  "flex h-16.5 w-16.5 items-center justify-center rounded-full border border-line-strong bg-ink/55 text-paper backdrop-blur-sm transition-colors";
 
 /* Placeholder "photo" tones — used only if no ImageKit images are available. */
 const FALLBACK_COLORS = [
@@ -183,47 +182,47 @@ export default function Hero({
                 Sprawdź ceny
               </button>
             </div>
-          </div>
 
-          <div className="flex items-center justify-center gap-4">
-            <a
-              href={WHATSAPP_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp"
-              className={`${iconButtonClass} hover:border-[#25D366] hover:bg-[#25D366]/10 hover:text-[#25D366]`}
-            >
-              <WhatsAppIcon className="h-7.5 w-7.5" />
-            </a>
+            <div className="flex items-center justify-center gap-4">
+              <a
+                href={WHATSAPP_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className={`${iconButtonClass} hover:text-[#25D366]`}
+              >
+                <WhatsAppIcon className="relative h-7.5 w-7.5" />
+              </a>
 
-            <button
-              type="button"
-              onClick={handleCopyEmail}
-              aria-label="Skopiuj adres e-mail"
-              className={`${iconButtonClass} cursor-pointer hover:border-[#FACC15] hover:bg-[#FACC15]/10 hover:text-[#FACC15]`}
-            >
-              <MailIcon className="h-7.5 w-7.5" />
-            </button>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                aria-label="Skopiuj adres e-mail"
+                className={`${iconButtonClass} cursor-pointer hover:text-[#FACC15]`}
+              >
+                <MailIcon className="relative h-7.5 w-7.5" />
+              </button>
 
-            <a
-              href="https://www.instagram.com/labbspace"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className={`${iconButtonClass} hover:border-[#E4405F] hover:bg-[#E4405F]/10 hover:text-[#E4405F]`}
-            >
-              <InstagramIcon className="h-7.5 w-7.5" />
-            </a>
+              <a
+                href="https://www.instagram.com/labbspace"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className={`${iconButtonClass} hover:text-[#E4405F]`}
+              >
+                <InstagramIcon className="relative h-7.5 w-7.5" />
+              </a>
 
-            <a
-              href="https://www.facebook.com/labbspace"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className={`${iconButtonClass} hover:border-[#1877F2] hover:bg-[#1877F2]/10 hover:text-[#1877F2]`}
-            >
-              <FacebookIcon className="h-7.5 w-7.5" />
-            </a>
+              <a
+                href="https://www.facebook.com/labbspace"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className={`${iconButtonClass} hover:text-[#1877F2]`}
+              >
+                <FacebookIcon className="relative h-7.5 w-7.5" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

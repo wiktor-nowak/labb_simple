@@ -1,20 +1,18 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-
-type WynajemPayload = {
-  imie: string;
-  email: string;
-  potrzeba: string;
-  dostarczamy: string[];
-  termin: string;
-  wiadomosc: string;
-};
+import {
+  DOSTARCZAMY_OPTIONS,
+  isValidPhone,
+  type WynajemPayload,
+} from "../../lib/wynajem";
 
 export async function POST(request: Request) {
   const body = (await request.json()) as Partial<WynajemPayload>;
   const { imie, email, potrzeba, dostarczamy, termin, wiadomosc } = body;
+  const telefon = body.telefon?.trim();
+  const zgodaTelefon = body.zgodaTelefon === true;
 
-  if (!imie || !email) {
+  if (!imie || !email || !telefon || !isValidPhone(telefon)) {
     return NextResponse.json(
       { error: "Brak wymaganych danych." },
       { status: 400 }
@@ -40,8 +38,11 @@ export async function POST(request: Request) {
     },
   });
 
-  const dostarczamyList =
-    dostarczamy && dostarczamy.length > 0 ? dostarczamy.join(", ") : "—";
+  /* Every option is listed, so it is clear what was and wasn't requested. */
+  const dostarczamyLines = DOSTARCZAMY_OPTIONS.map(
+    ({ label, value }) =>
+      `  [${dostarczamy?.includes(value) ? "x" : " "}] ${label}`,
+  );
 
   try {
     await transporter.sendMail({
@@ -50,12 +51,25 @@ export async function POST(request: Request) {
       replyTo: email,
       subject: `Nowe zapytanie wynajmu — ${imie}`,
       text: [
+        "KONTAKT",
         `Imię: ${imie}`,
         `E-mail: ${email}`,
+        `Telefon: ${telefon}`,
+        `Kontakt telefoniczny: ${
+          zgodaTelefon
+            ? "TAK — klient zgadza się na telefon"
+            : "NIE — kontaktuj się przez WhatsApp"
+        }`,
+        "",
+        "ZAPYTANIE",
         `Czego potrzebuje: ${potrzeba ?? "—"}`,
-        `Co dostarczamy: ${dostarczamyList}`,
         `Preferowany termin: ${termin || "—"}`,
-        `Wiadomość: ${wiadomosc || "—"}`,
+        "",
+        "DODATKOWE POTRZEBY (Co dostarczamy?)",
+        ...dostarczamyLines,
+        "",
+        "WIADOMOŚĆ",
+        wiadomosc || "—",
       ].join("\n"),
     });
 

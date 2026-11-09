@@ -2,9 +2,16 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { FULL_EQUIPMENT_LIST_URL } from "../lib/equipment";
 import PricingDialog from "./PricingDialog";
 
-export default function StudioActions() {
+type StudioActionsProps = {
+  showEquipmentList?: boolean;
+};
+
+export default function StudioActions({
+  showEquipmentList = true,
+}: StudioActionsProps) {
   const [pricingOpen, setPricingOpen] = useState(false);
 
   return (
@@ -23,14 +30,16 @@ export default function StudioActions() {
         >
           Cennik
         </button>
-        <a
-          href="https://filmbeast.pl/index.php/uslugi/#naszarsenal"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center rounded-[7px] border border-line-strong px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-paper transition-colors hover:bg-white/5"
-        >
-          Zobacz pełną listę sprzętu
-        </a>
+        {showEquipmentList && (
+          <a
+            href={FULL_EQUIPMENT_LIST_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center rounded-[7px] border border-line-strong px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-paper transition-colors hover:bg-white/5"
+          >
+            Zobacz pełną listę sprzętu
+          </a>
+        )}
       </div>
 
       <PricingDialog open={pricingOpen} onClose={() => setPricingOpen(false)} />

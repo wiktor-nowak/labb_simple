@@ -1,32 +1,30 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import {
+  DOSTARCZAMY_OPTIONS,
+  isValidPhone,
+  PHONE_ERROR,
+  POTRZEBY_OPTIONS,
+  sanitizePhoneInput,
+  type WynajemPayload,
+} from "../lib/wynajem";
 
-type FormState = {
-  imie: string;
-  email: string;
-  potrzeba: string;
-  dostarczamy: string[];
-  termin: string;
-  wiadomosc: string;
-};
+type FormState = WynajemPayload;
 
 const INITIAL_STATE: FormState = {
   imie: "",
   email: "",
+  telefon: "",
+  zgodaTelefon: true,
   potrzeba: "Wynajem studia",
   dostarczamy: [],
   termin: "",
   wiadomosc: "",
 };
 
-const POTRZEBY_OPTIONS = ["Wynajem studia", "Wynajem sprzętu"];
-
-const DOSTARCZAMY_OPTIONS = [
-  { label: "Obsługa fotograficzna/operatorska rezerwacji", value: "nagrywka" },
-  { label: "Scenografia pod zamówienie", value: "scenografia" },
-  { label: "Przeszkolony oświetleniowiec", value: "gafer" },
-];
+const PHONE_TOOLTIP =
+  "W przypadku braku zgody na kontakt telefoniczny, będziemy kontaktować się przy użyciu WhatsApp.";
 
 const fieldClass =
   "w-full rounded-[7px] border border-line bg-[#0F0F0F] px-4 py-3 text-paper placeholder:text-faint focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30";
@@ -100,6 +98,78 @@ export default function WynajemForm() {
           onChange={(event) => update("email", event.target.value)}
           className={fieldClass}
         />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="telefon" className={labelClass}>
+          Telefon
+        </label>
+        <input
+          id="telefon"
+          type="tel"
+          required
+          autoComplete="tel"
+          inputMode="tel"
+          maxLength={24}
+          value={form.telefon}
+          onChange={(event) => {
+            const value = sanitizePhoneInput(event.target.value);
+            update("telefon", value);
+            event.target.setCustomValidity(
+              value && !isValidPhone(value) ? PHONE_ERROR : "",
+            );
+          }}
+          onInvalid={(event) => {
+            if (event.currentTarget.validity.valueMissing) {
+              event.currentTarget.setCustomValidity("Podaj numer telefonu.");
+            }
+          }}
+          className={fieldClass}
+        />
+        <div className="flex items-center gap-2">
+          <label
+            htmlFor="zgodaTelefon"
+            className="flex cursor-pointer items-center gap-3 text-sm text-paper"
+          >
+            <input
+              id="zgodaTelefon"
+              type="checkbox"
+              checked={form.zgodaTelefon}
+              onChange={(event) => update("zgodaTelefon", event.target.checked)}
+              className="h-4 w-4 cursor-pointer accent-signal"
+            />
+            Zezwalam na kontakt telefoniczny
+          </label>
+          {/* Hover on desktop, tap (focus) on touch screens. */}
+          <span className="group relative inline-flex">
+            <button
+              type="button"
+              aria-label="Więcej informacji"
+              aria-describedby="zgodaTelefon-tooltip"
+              className="inline-flex h-5 w-5 cursor-help items-center justify-center rounded-full text-faint transition-colors hover:text-paper focus-visible:text-paper focus-visible:outline-none"
+            >
+              <svg
+                aria-hidden
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 11v5" strokeLinecap="round" />
+                <circle cx="12" cy="8" r="0.6" fill="currentColor" />
+              </svg>
+            </button>
+            <span
+              id="zgodaTelefon-tooltip"
+              role="tooltip"
+              className="pointer-events-none invisible absolute bottom-full left-1/2 z-10 mb-2 w-64 -translate-x-1/2 rounded-[7px] border border-line-strong bg-surface px-3 py-2 text-xs leading-relaxed text-muted opacity-0 transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+            >
+              {PHONE_TOOLTIP}
+            </span>
+          </span>
+        </div>
       </div>
 
       <div className="flex flex-col gap-2">

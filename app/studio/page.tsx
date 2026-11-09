@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import SpecTable from "../components/SpecTable";
 import StudioActions from "../components/StudioActions";
 import TechnicalDrawings from "../components/TechnicalDrawings";
-import { BASE_EQUIPMENT } from "../lib/equipment";
 
 export const metadata: Metadata = {
   title: "Studio — specyfikacja i wyposażenie",
@@ -25,7 +25,7 @@ const DIMENSION_ROWS = [
   { label: "Strefa zdjęciowa", value: "~100 m²" },
   { label: "Wymiary (A) x (B)", value: "~10 m x ~10 m" },
   { label: "Szerokość teł", value: "2,72 m" },
-  { label: "Wysokość studia min (X)", value: "3,6 m" },
+  { label: "Wysokość studia min (X)", value: "3,5 m" },
   { label: "Wysokość studia max (W)", value: "4,2 m" },
   { label: "Do konstrukcji min (Y)", value: "2,9 m" },
   { label: "Do konstrukcji max (Z)", value: "3,4 m" },
@@ -58,24 +58,21 @@ export default function StudioPage() {
           <SpecTable rows={DIMENSION_ROWS} />
         </div>
 
-        <p className="mt-16 font-mono text-xs uppercase tracking-[0.2em] text-faint">
-          Wyposażenie w cenie wynajmu
-        </p>
-        <div className="mt-6 max-w-xl rounded-2xl border border-line bg-surface p-6 tablet:p-8">
-          {BASE_EQUIPMENT.map((item, index) => (
-            <div
-              key={item}
-              className={`flex items-center gap-3 py-3 ${
-                index < BASE_EQUIPMENT.length - 1 ? "border-b border-line" : ""
-              }`}
-            >
-              <span
-                aria-hidden
-                className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal"
-              />
-              <span className="font-sans text-paper">{item}</span>
-            </div>
-          ))}
+        <div className="mt-6 flex flex-col items-start gap-6 rounded-2xl border border-line bg-surface p-6 tablet:flex-row tablet:items-center tablet:justify-between tablet:p-8">
+          <p className="text-base leading-relaxed text-paper">
+            W cenie wynajmu studia dostajesz podstawowy pakiet oświetlenia.
+            Meble i rekwizyty także są na miejscu.
+            <br/>
+            Wszystko, co znajdziesz po
+            przejściu w link, możesz wykorzystać podczas sesji, bez dodatkowych
+            opłat.
+          </p>
+          <Link
+            href="/sprzet"
+            className="inline-flex shrink-0 items-center rounded-[7px] border border-line-strong px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-paper transition-colors hover:bg-white/5"
+          >
+            Sprawdź dostępny sprzęt
+          </Link>
         </div>
 
         <StudioActions />

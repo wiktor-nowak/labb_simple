@@ -7,6 +7,7 @@ import PricingDialog from "./PricingDialog";
 
 const NAV_LINKS = [
   { href: "/studio", label: "Studio" },
+  { href: "/sprzet", label: "Sprzęt" },
   { href: "/cennik", label: "Cennik" },
   { href: "/kontakt", label: "Kontakt" },
 ];

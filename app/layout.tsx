@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RouteVideoPreloader from "./components/RouteVideoPreloader";
 import { magion, sinter } from "./fonts";
 import { CONTACT_EMAIL, STUDIO_PHONE } from "./lib/contact";
 import "./globals.css";
@@ -89,6 +90,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-ink text-paper">
         {children}
+        <RouteVideoPreloader />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

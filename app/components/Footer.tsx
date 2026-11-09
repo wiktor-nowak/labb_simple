@@ -6,31 +6,32 @@ import {
   LinkedInIcon,
   TikTokIcon,
 } from "./icons/SocialIcons";
+import { iconButtonClass } from "./icons/iconButtonClass";
 
 const SOCIAL_LINKS = [
   {
     label: "Instagram",
     href: "https://www.instagram.com/labbspace",
     Icon: InstagramIcon,
-    hover: "hover:text-[#E4405F] hover:border-[#E4405F] hover:bg-[#E4405F]/10",
+    hover: "hover:text-[#E4405F]",
   },
   {
     label: "Facebook",
     href: "https://www.facebook.com/labbspace",
     Icon: FacebookIcon,
-    hover: "hover:text-[#1877F2] hover:border-[#1877F2] hover:bg-[#1877F2]/10",
+    hover: "hover:text-[#1877F2]",
   },
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/company/labbspace",
     Icon: LinkedInIcon,
-    hover: "hover:text-[#38B6FF] hover:border-[#38B6FF] hover:bg-[#38B6FF]/10",
+    hover: "hover:text-[#38B6FF]",
   },
   {
     label: "TikTok",
     href: "https://www.tiktok.com/@labbspace",
     Icon: TikTokIcon,
-    hover: "hover:text-[#25F4EE] hover:border-[#25F4EE] hover:bg-[#25F4EE]/10",
+    hover: "hover:text-[#25F4EE]",
   },
 ];
 
@@ -53,9 +54,9 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className={`flex h-15 w-15 items-center justify-center rounded-full border border-line-strong text-muted transition-colors ${hover}`}
+              className={`${iconButtonClass} ${hover}`}
             >
-              <Icon className="h-7.5 w-7.5" />
+              <Icon className="relative h-7.5 w-7.5" />
             </a>
           ))}
         </div>

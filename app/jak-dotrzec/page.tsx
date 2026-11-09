@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LocationMap from "../components/LocationMap";
+import RouteMedia from "../components/RouteMedia";
 import SpecTable from "../components/SpecTable";
 import { STUDIO_ADDRESS } from "../lib/contact";
 
@@ -26,22 +26,17 @@ export default function JakDotrzecPage() {
           Znajdź nas
         </h1>
         <p className="mt-4 text-base leading-relaxed text-muted">
-          Studio znajduje się w centrum Bielska-Białej. Poniżej trasa dojazdu
-          oraz mapa z dokładną lokalizacją.
+          Studio znajduje się w centrum Bielska-Białej. Poniżej film z drogą do
+          drzwi studia, trasa dojazdu oraz mapa z dokładną lokalizacją.
         </p>
 
-        <div className="mt-12 grid grid-cols-1 gap-8 tablet:grid-cols-2">
-          <div className="flex flex-col gap-6 rounded-2xl border border-line bg-surface p-6 tablet:p-8">
-            <div className="relative aspect-4/3 overflow-hidden rounded-xl">
-              <Image
-                src="/schemes/way_to_studio_labb.png"
-                alt="Trasa dojazdu do studia"
-                fill
-                sizes="(max-width: 720px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-            <SpecTable rows={[{ label: "Adres studia", value: STUDIO_ADDRESS }]} />
+        <div className="mt-12 grid grid-cols-1 gap-5 tablet:grid-cols-[3fr_2fr]">
+          <div className="flex flex-col gap-4 rounded-2xl border border-line bg-surface p-2">
+            <RouteMedia />
+            <SpecTable
+              rows={[{ label: "Adres studia", value: STUDIO_ADDRESS }]}
+              className="mx-4 mb-4"
+            />
           </div>
 
           <LocationMap address={STUDIO_ADDRESS} />

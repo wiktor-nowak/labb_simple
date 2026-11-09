@@ -42,6 +42,8 @@ export default function KontaktPage() {
                 { label: "Adres", value: STUDIO_ADDRESS },
                 { label: "Telefon", value: STUDIO_PHONE },
                 { label: "E-mail", value: CONTACT_EMAIL },
+                { label: "Godziny otwarcia", value: "zgodnie z rezerwacją" },
+                { label: "Godziny kontaktu", value: "10:00 – 18:00, w weekendy do 24h" },
               ]}
               showEdges={false}
             />

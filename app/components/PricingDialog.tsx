@@ -1,8 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { BASE_EQUIPMENT } from "../lib/equipment";
+import {
+  FULL_EQUIPMENT_LIST_URL,
+  INCLUDED_EQUIPMENT_LABELS,
+} from "../lib/equipment";
 
 type PricingDialogProps = {
   open: boolean;
@@ -17,7 +21,7 @@ const HOURLY_RATES = [
   { label: "5 h", price: "660 zł" },
   { label: "6 h", price: "780 zł" },
   { label: "7 h", price: "900 zł" },
-  { label: "8 - 12h", price: "1000 zł" },
+  { label: "8 h i więcej (cały dzień)", price: "1000 zł" },
 ];
 
 export default function PricingDialog({ open, onClose }: PricingDialogProps) {
@@ -123,7 +127,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
               Oświetlenie w cenie wynajmu
             </p>
             <div className="mt-4 border-t border-line">
-              {BASE_EQUIPMENT.map((item) => (
+              {INCLUDED_EQUIPMENT_LABELS.map((item) => (
                 <div
                   key={item}
                   className="flex items-center gap-3 border-b border-line py-3"
@@ -132,7 +136,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
                     aria-hidden
                     className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal"
                   />
-                  <span className="font-sans text-paper">{item}</span>
+                  <span className="font-sans text-sm text-paper">{item}</span>
                 </div>
               ))}
             </div>
@@ -141,12 +145,23 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
               Warunki rezerwacji
             </p>
             <p className="mt-4 text-sm leading-relaxed text-muted">
-              Minimalna rezerwacja: 1 h
-              <br/>
-              Stawka całodniowa: 1000 zł.
+              Minimalna rezerwacja: 1 h.
               <br/>
               Bezpłatne odwołanie: do 48 h przed terminem.
             </p>
+
+            <div className="mt-8 flex justify-center">
+              {/* Closing first also covers clicking it while already on /sprzet. */}
+              <Link
+                href="/sprzet"
+                onClick={onClose}
+                className="inline-flex items-center rounded-[7px] border border-line-strong px-6 py-3 text-center font-mono text-xs font-bold uppercase leading-relaxed tracking-[0.2em] text-paper transition-colors hover:bg-white/5"
+              >
+                Sprawdź sprzęt
+                <br />
+                dostępny w cenie
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -164,7 +179,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
             type="button"
             className="inline-flex items-center rounded-[7px] border border-line-strong px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-paper transition-colors hover:bg-white/5 cursor-pointer"
             onClick={() => {
-              window.location.href = "https://filmbeast.pl/index.php/uslugi/#naszarsenal";
+              window.location.href = FULL_EQUIPMENT_LIST_URL;
             }}
           >
             Zobacz pełną listę sprzętu

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { iconButtonClass } from "./icons/iconButtonClass";
 import { WhatsAppIcon } from "./icons/SocialIcons";
 import PricingDialog from "./PricingDialog";
 import { WHATSAPP_HREF } from "../lib/contact";
@@ -32,13 +33,13 @@ export default function WynajemInfoPanel() {
           Godziny otwarcia
         </p>
         <p className="mt-2 font-sans text-paper">
-          Codziennie 6:00 – 24:00, po wcześniejszej rezerwacji
+          Udostępniamy studio zgodnie z terminem i godziną rezerwacji, także w weekendy.
         </p>
         <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-faint">
           Godziny kontaktu
         </p>
         <p className="mt-2 font-sans text-paper">
-          W tygodniu 10:00 – 18:00, w weekendy do 24h
+          W tygodniu 10:00 – 18:00, w weekendy do 24h.
         </p>
       </div>
 
@@ -56,9 +57,9 @@ export default function WynajemInfoPanel() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="WhatsApp"
-          className="flex h-15 w-15 items-center justify-center rounded-full border border-line-strong text-muted transition-colors hover:border-[#25D366] hover:bg-[#25D366]/10 hover:text-[#25D366]"
+          className={`${iconButtonClass} hover:text-[#25D366]`}
         >
-          <WhatsAppIcon className="h-7.5 w-7.5" />
+          <WhatsAppIcon className="relative h-7.5 w-7.5" />
         </a>
       </div>
 
