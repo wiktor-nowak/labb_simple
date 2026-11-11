@@ -4,17 +4,17 @@ import { Image as IKImage } from "@imagekit/next";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 type FurnitureCarouselProps = {
-  /* Shown left of the arrows, so the heading and controls share a row. */
   heading: ReactNode;
   photos: string[];
   urlEndpoint?: string;
 };
 
+/* Same look as the equipment carousel's arrows; hidden at either end. */
 const arrowClass =
-  "flex h-11 w-11 cursor-pointer items-center justify-center rounded-[7px] border border-line-strong text-paper transition-colors hover:bg-white/5 disabled:cursor-default disabled:opacity-30 disabled:hover:bg-transparent";
+  "absolute top-1/2 z-10 flex h-11 w-11 cursor-pointer -translate-y-1/2 items-center justify-center rounded-[7px] border border-line-strong bg-ink/55 text-paper backdrop-blur-sm transition-[background-color,opacity] hover:bg-ink/80 disabled:pointer-events-none disabled:opacity-0";
 
 /* A native scroll-snap row: arrows step one card, touch and trackpads scroll
-   freely. Mobile shows one card with the next peeking in; tablet up shows 3. */
+   freely. Mobile shows one full-width card; tablet up shows 3. */
 export default function FurnitureCarousel({
   heading,
   photos,
@@ -56,82 +56,86 @@ export default function FurnitureCarousel({
 
   return (
     <div>
-      <div className="mb-6 flex items-end justify-between gap-6">
-        <div>{heading}</div>
-        <div className="flex shrink-0 gap-2">
-          <button
-            type="button"
-            onClick={() => step(-1)}
-            disabled={!canPrev}
-            aria-label="Poprzednie zdjęcie"
-            className={arrowClass}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
+      <div className="mb-6">{heading}</div>
+
+      <p className="mb-8 max-w-3xl text-base leading-relaxed text-muted">
+        Studio to nie tylko światło i tło. Do Twojej dyspozycji mamy także meble
+        i rekwizyty. Dzięki nim, łatwo zbudujesz scenę zgodnie z planem,
+        zaczynając od minimalistycznego portretu aż po pełną aranżację z
+        charakterem. Przejrzyj zdjęcia i zobacz, co możesz wykorzystać podczas
+        swojej sesji. Całe wyposażenie jest dostępne w ramach wynajmu.
+      </p>
+
+      {/* Arrows sit on the photos' edges, where the eye already is. */}
+      <div className="relative">
+        <ul
+          ref={trackRef}
+          onScroll={updateArrows}
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {photos.map((url, index) => (
+            <li
+              key={url}
+              className="w-full shrink-0 snap-start tablet:w-[calc((100%-2rem)/3)]"
             >
-              <path
-                d="M15 6l-6 6 6 6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={() => step(1)}
-            disabled={!canNext}
-            aria-label="Następne zdjęcie"
-            className={arrowClass}
+              <div className="relative aspect-2/3 overflow-hidden rounded-[14px] border border-line bg-surface">
+                <IKImage
+                  src={url}
+                  urlEndpoint={urlEndpoint}
+                  alt={`Meble i akcesoria studia — zdjęcie ${index + 1} z ${photos.length}`}
+                  fill
+                  sizes="(max-width: 719px) 100vw, 33vw"
+                  className="object-cover"
+                  transformation={[{ width: 800, quality: 80 }]}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <button
+          type="button"
+          onClick={() => step(-1)}
+          disabled={!canPrev}
+          aria-label="Poprzednie zdjęcie"
+          className={`${arrowClass} left-2`}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
           >
-            <svg
-              viewBox="0 0 24 24"
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            >
-              <path
-                d="M9 6l6 6-6 6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
+            <path
+              d="M15 6l-6 6 6 6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+        <button
+          type="button"
+          onClick={() => step(1)}
+          disabled={!canNext}
+          aria-label="Następne zdjęcie"
+          className={`${arrowClass} right-2`}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
+            <path
+              d="M9 6l6 6-6 6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
       </div>
-
-                <p className="mb-5 text-base leading-relaxed text-muted">
-Studio to nie tylko światło i tło. Do Twojej dyspozycji mamy także meble i rekwizyty. Dzięki nim, łatwo zbudujesz scenę zgodnie z planem, zaczynając od minimalistycznego portretu aż po pełną aranżację z charakterem. Przejrzyj zdjęcia i zobacz, co możesz wykorzystać podczas swojej sesji. Całe wyposażenie jest dostępne w ramach wynajmu.
-          </p>
-
-      <ul
-        ref={trackRef}
-        onScroll={updateArrows}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {photos.map((url, index) => (
-          <li
-            key={url}
-            className="w-4/5 shrink-0 snap-start tablet:w-[calc((100%-2rem)/3)]"
-          >
-            <div className="relative aspect-2/3 overflow-hidden rounded-[14px] border border-line bg-surface">
-              <IKImage
-                src={url}
-                urlEndpoint={urlEndpoint}
-                alt={`Meble i akcesoria studia — zdjęcie ${index + 1} z ${photos.length}`}
-                fill
-                sizes="(max-width: 719px) 80vw, 33vw"
-                className="object-cover"
-                transformation={[{ width: 800, quality: 80 }]}
-              />
-            </div>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

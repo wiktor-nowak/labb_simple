@@ -90,7 +90,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
                 Stawki godzinowe
               </p>
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
-                [kwota brutto]
+                
               </p>
             </div>
             <div className="mt-4 border-t border-line">
@@ -109,7 +109,7 @@ export default function PricingDialog({ open, onClose }: PricingDialogProps) {
                 Opłaty dodatkowe
               </p>
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
-                [kwota brutto]
+                
               </p>
             </div>
             <div className="mt-4 border-t border-line">
